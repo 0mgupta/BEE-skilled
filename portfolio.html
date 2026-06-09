@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Om Gupta — MERN Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e11;
+      --surface: #16161a;
+      --border: #2a2a32;
+      --accent: #7c6af7;
+      --accent2: #c084fc;
+      --text: #e8e6f0;
+      --muted: #7a788a;
+      --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 6vw; background: rgba(14,14,17,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    #about { min-height: 100vh; display: flex; align-items: center; padding: 8rem 6vw 4rem; }
+    .hero-inner { max-width: 780px; }
+    .hero-eyebrow { display: inline-block; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; border: 1px solid rgba(124,106,247,0.35); padding: 0.3rem 0.9rem; border-radius: 2rem; }
+    .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; color: var(--white); margin-bottom: 1.5rem; }
+    .hero-name span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-skills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .skill-pill { font-size: 0.78rem; padding: 0.3rem 0.85rem; border: 1px solid rgba(124,106,247,0.35); border-radius: 2rem; color: var(--accent2); letter-spacing: 0.04em; }
+    .btn { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--white); text-decoration: none; padding: 0.85rem 2rem; border-radius: 0.5rem; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; transition: opacity 0.2s, transform 0.2s; border: none; cursor: pointer; }
+    .btn:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); margin-left: 1rem; }
+    .btn-ghost:hover { border-color: var(--accent); }
+
+    /* SECTION */
+    section { padding: 6rem 6vw; scroll-margin-top: 6rem; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--white); letter-spacing: -0.03em; margin-bottom: 3rem; line-height: 1.1; }
+
+    /* EDUCATION */
+    #education { background: var(--surface); }
+    .edu-grid { display: grid; gap: 1.5rem; max-width: 800px; }
+    .edu-card { border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.75rem 2rem; background: var(--bg); transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+    .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+    .edu-card:hover { border-color: rgba(124,106,247,0.4); transform: translateY(-3px); }
+    .edu-card:hover::before { transform: scaleX(1); }
+    .edu-year { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); margin-bottom: 0.25rem; }
+    .edu-school { color: var(--muted); font-size: 0.9rem; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card { border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; background: var(--surface); transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
+    .project-card:hover { border-color: rgba(124,106,247,0.4); transform: translateY(-4px); }
+    .project-tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
+    .project-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--white); margin-bottom: 0.75rem; }
+    .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; flex: 1; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag { font-size: 0.72rem; padding: 0.25rem 0.65rem; border: 1px solid var(--border); border-radius: 2rem; color: var(--muted); letter-spacing: 0.04em; }
+    .project-link { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1.25rem; color: var(--accent); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: gap 0.2s; }
+    .project-link:hover { gap: 0.6rem; }
+
+    /* CONTACT */
+    #contact { background: var(--surface); }
+    .contact-inner { max-width: 600px; }
+    .contact-desc { color: var(--muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .contact-chip { display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.7rem 1.2rem; color: var(--text); text-decoration: none; font-size: 0.88rem; transition: border-color 0.2s, color 0.2s; }
+    .contact-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-chip svg { width: 16px; height: 16px; }
+    .contact-form { display: grid; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field label { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .form-field input, .form-field textarea { background: var(--bg); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.8rem 1rem; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--accent); }
+    .form-field textarea { min-height: 120px; }
+
+    /* FOOTER */
+    footer { padding: 2rem 6vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-desc { font-size: 1rem; }
+    }
+
+    /* FADE */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#about">OG.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Open to opportunities</span>
+      <h1 class="hero-name">Om<br/><span>Gupta.</span></h1>
+      <p class="hero-desc">
+        MERN Stack Developer passionate about building fast, scalable, and user-friendly web applications — from clean REST APIs to polished React interfaces.
+      </p>
+      <div class="hero-skills">
+        <span class="skill-pill">MongoDB</span>
+        <span class="skill-pill">Express.js</span>
+        <span class="skill-pill">React.js</span>
+        <span class="skill-pill">Node.js</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">REST APIs</span>
+        <span class="skill-pill">Git & GitHub</span>
+      </div>
+      <a href="#projects" class="btn">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Hire Me</a>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label fade-in">Background</p>
+    <h2 class="section-title fade-in">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <div class="edu-year">2021 – 2025</div>
+        <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+        <div class="edu-school">Specialization in Full-Stack Web Development</div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-year">Ongoing</div>
+        <div class="edu-degree">MERN Stack Development</div>
+        <div class="edu-school">Self-taught · Projects, courses & open-source contributions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label fade-in">Work</p>
+    <h2 class="section-title fade-in">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-tag">Full Stack</div>
+        <div class="project-name">DevConnect</div>
+        <p class="project-desc">A developer networking platform where users can share posts, follow peers, and showcase their tech stack. Features JWT auth, real-time notifications, and a responsive feed.</p>
+        <div class="project-stack">
+          <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">JWT</span>
+        </div>
+        <a href="#" class="project-link">View project →</a>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-tag">E-Commerce</div>
+        <div class="project-name">ShopNest</div>
+        <p class="project-desc">A full-featured e-commerce app with product listings, cart management, Razorpay payment integration, and an admin dashboard to manage orders and inventory.</p>
+        <div class="project-stack">
+          <span class="tag">React</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span class="tag">Razorpay</span>
+        </div>
+        <a href="#" class="project-link">View project →</a>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-tag">Productivity</div>
+        <div class="project-name">TaskFlow</div>
+        <p class="project-desc">A Kanban-style task manager with drag-and-drop boards, deadline reminders, and team collaboration. Built with a RESTful backend and real-time updates via Socket.io.</p>
+        <div class="project-stack">
+          <span class="tag">React</span><span class="tag">Socket.io</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+        </div>
+        <a href="#" class="project-link">View project →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label fade-in">Say hello</p>
+      <h2 class="section-title fade-in">Contact</h2>
+      <p class="contact-desc fade-in">I'm open to internships, freelance projects, and full-time roles. Drop me a message and I'll get back to you within 24 hours.</p>
+
+      <div class="contact-links fade-in">
+        <a href="mailto:omgupta@email.com" class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          omgupta@email.com
+        </a>
+        <a href="#" class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="#" class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="contact-form fade-in">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" placeholder="Your name"/>
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your project or opportunity..."></textarea>
+        </div>
+        <div>
+          <button class="btn" type="button">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Om Gupta</span>
+    <span>MERN Stack Developer · 2025</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
